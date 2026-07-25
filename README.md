@@ -77,3 +77,4 @@ Contrast subagent: skill = instructions injected into current thread. Subagent =
 - Cost Usage: [Anthropic Recommendations](https://code.claude.com/docs/en/costs)
 - Reusable Skills: [Skills.sh](https://www.skills.sh/)
 - Using local ollama models: [Guide](https://gist.github.com/Klerith/afaf750d5172a648fe262cd12b4cd7d8)
+- The agent loop: [Site](https://ccunpacked.dev/#agent-loop)
