@@ -62,6 +62,10 @@ Use case: repo-specific workflow, checklist, domain knowledge, tool wrapper. Pac
 
 Contrast subagent: skill = instructions injected into current thread. Subagent = separate context, own tools, results return compressed.
 
+## Claude Code File
+
+Use the command `/init` to init a new `CLAUDE.md` file with codebase documentation. **This file is included in the context window**.
+
 ### Important Notes
 
 - Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
