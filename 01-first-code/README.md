@@ -4,6 +4,8 @@ Here we will be saving different prompts and notes.
 
 ## Prompts
 
+1. Initial Example
+
 ```
 Create a html file with a counter. Add + and - buttons
 ```
