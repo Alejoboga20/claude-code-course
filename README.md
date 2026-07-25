@@ -50,6 +50,7 @@ You can also jump straight to a specific model, e.g. to use Opus for planning an
 | `/clear`   | Clear the current context          |
 | `/ide`     | Connect Claude Code to your editor |
 | `/context` | Check what's in the context        |
+| `/rewind`  | Revert changes made by claude.     |
 
 ## Skills
 
@@ -69,6 +70,7 @@ Contrast subagent: skill = instructions injected into current thread. Subagent =
 - Install language plugins.
 - Use `hooks` and `skills` to reduce the context.
 - Delegate tasks to `subagents`.
+- When using `/clear` we lost context and we are unble to use `/rewind`.
 
 ### Useful Resources
 
