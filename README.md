@@ -1,31 +1,76 @@
 # Claude Code
 
-This repository contains my learnings of `claude-code`
+This repository contains my notes and learnings on `claude-code`, an agentic coding assistant that runs in your terminal.
+
+Claude Code is an agentic coding environment. Unlike a chatbot that answers questions and waits, Claude Code can read your files, run commands, make changes, and autonomously work through problems while you watch, redirect, or step away entirely.
+
+See [docs/installations.md](docs/installations.md) for the recommended tools and setup used throughout this course.
 
 ## First steps
 
-After installing `claude-code` in the terminal we need to authenticate into our account using the following commands:
+### Authentication
+
+After installing `claude-code`, launch it and log in:
 
 ```bash
 claude
-/login # We need to open web browser and access into our account.
+/login   # opens a browser window to authenticate your account
 ```
 
-Once we are authenticated we can check the available models and select the one we want to use:
+### Choosing a model
+
+Once authenticated, list the available models with:
 
 ```bash
 /model
 ```
 
-Out of that list we can select the model we want to use for, for example, planning:
+This opens a menu to pick which model to use:
+
+```
+  1. Default (recommended)  Sonnet 5 · Efficient for routine tasks
+  2. Sonnet                 Sonnet 5 · Efficient for routine tasks
+  3. Fable                  Fable 5 · Most capable for your hardest and longest-running tasks · Requires usage credits
+  4. Opus                   Opus 4.8 · Best for everyday, complex tasks · ~2× usage vs Sonnet
+  5. Haiku                  Haiku 4.5 · Fastest for quick answers
+  6. Opus Plan Mode         Use Opus in plan mode, Sonnet otherwise
+```
+
+You can also jump straight to a specific model, e.g. to use Opus for planning and Sonnet for everything else:
 
 ```bash
 /model opusplan
-
-    1. Default (recommended)  Sonnet 5 · Efficient for routine tasks
-    2. Sonnet                 Sonnet 5 · Efficient for routine tasks
-    3. Fable                  Fable 5 · Most capable for your hardest and longest-running tasks · Requires usage credits
-    4. Opus                   Opus 4.8 · Best for everyday, complex tasks · ~2× usage vs Sonnet
-    5. Haiku                  Haiku 4.5 · Fastest for quick answers
-  ❯ 6. Opus Plan Mode ✔       Use Opus in plan mode, Sonnet otherwise
 ```
+
+### Other useful commands
+
+| Command    | Description                        |
+| ---------- | ---------------------------------- |
+| `/usage`   | Check usage and stats              |
+| `/clear`   | Clear the current context          |
+| `/ide`     | Connect Claude Code to your editor |
+| `/context` | Check what's in the context        |
+
+## Skills
+
+Skills = packaged instructions, load on demand, extend agent capability without bloat context.
+
+Agent see skill name + one-line description upfront. Match task, invoke, full instructions load then. Skip otherwise — save tokens.
+
+Use case: repo-specific workflow, checklist, domain knowledge, tool wrapper. Package once, reuse many session.
+
+Contrast subagent: skill = instructions injected into current thread. Subagent = separate context, own tools, results return compressed.
+
+### Important Notes
+
+- Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
+- Rename session and compact them for later review (`/rename [name]` `/resume [name]`).
+- Prioritize CLI over MCPs.
+- Install language plugins.
+- Use `hooks` and `skills` to reduce the context.
+- Delegate tasks to `subagents`.
+
+### Useful Resources
+
+- Cost Usage: [Anthropic Recommendations](https://code.claude.com/docs/en/costs)
+- Reusable Skills: [Skills.sh](https://www.skills.sh/)
