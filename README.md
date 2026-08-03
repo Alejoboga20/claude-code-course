@@ -82,6 +82,10 @@ We can paste images inside the terminal and, we can combine it with text. (we ca
 [Image #1] use this image as one of the asteroids variant
 ```
 
+## Use of GIT
+
+Claude can use GIT from our terminal (It has full access to it as it can see .git directory inside the project). It may be better to use plan mode to explore git history changes.
+
 ### Important Notes
 
 - Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
