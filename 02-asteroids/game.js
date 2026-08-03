@@ -68,6 +68,10 @@ const RADII = [0, 16, 30, 50]; // por tamaño 1, 2, 3
 const SPEEDS = [0, 85, 55, 32]; // velocidad base por tamaño
 const POINTS = [0, 100, 50, 20]; // puntos por tamaño
 
+// ── Power-up: disparo triple ──────────────────────────────────────────────────
+const TRIPLE_SHOT_DURATION = 10; // segundos
+const TRIPLE_SHOT_SPREAD = (12 * Math.PI) / 180; // ±12°
+
 // Forma fija (offsets normalizados) para variante de asteroide grande, con muesca cóncava
 const BIG_ASTEROID_SHAPE = [
   [-0.1556, -0.9308],
@@ -196,7 +200,9 @@ class Ship {
     const NOSE = 21;
     const ox = this.x + Math.cos(this.angle) * NOSE;
     const oy = this.y + Math.sin(this.angle) * NOSE;
-    return [new Bullet(ox, oy, this.angle)];
+    const offsets =
+      tripleShotTimer > 0 ? [-TRIPLE_SHOT_SPREAD, 0, TRIPLE_SHOT_SPREAD] : [0];
+    return offsets.map((d) => new Bullet(ox, oy, this.angle + d));
   }
 
   draw() {
@@ -219,6 +225,10 @@ class Ship {
     ctx.lineTo(-7, 0); // muesca trasera
     ctx.lineTo(-12, 9); // ala derecha
     ctx.closePath();
+    if (tripleShotTimer > 0) {
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+    }
     ctx.stroke();
 
     // Llama del propulsor
@@ -272,6 +282,8 @@ let ship, bullets, asteroids, particles;
 let score, lives, level;
 let state; // 'playing' | 'dead' | 'gameover'
 let deadTimer;
+let tripleShotTimer; // segundos restantes de disparo triple
+let tripleShotUsed; // el power-up solo se activa una vez por partida
 
 function spawnAsteroids(count) {
   const SAFE_DIST = 130;
@@ -294,6 +306,8 @@ function initGame() {
   lives = 3;
   level = 1;
   state = "playing";
+  tripleShotTimer = 0;
+  tripleShotUsed = false;
   spawnAsteroids(4);
 }
 
@@ -302,6 +316,8 @@ function nextLevel() {
   bullets = [];
   particles = [];
   ship.reset();
+  tripleShotTimer = 0;
+  tripleShotUsed = false;
   spawnAsteroids(3 + level);
 }
 
@@ -312,6 +328,7 @@ function explode(x, y, count = 8) {
 function killShip() {
   explode(ship.x, ship.y, 14);
   ship.dead = true;
+  tripleShotTimer = 0; // morir cancela el power-up
   lives--;
   if (lives <= 0) {
     state = "gameover";
@@ -347,6 +364,8 @@ function update(dt) {
     bullets.push(...ship.tryShoot());
   }
 
+  if (tripleShotTimer > 0) tripleShotTimer -= dt;
+
   ship.update(dt);
   bullets.forEach((b) => b.update(dt));
   asteroids.forEach((a) => a.update(dt));
@@ -363,6 +382,11 @@ function update(dt) {
         b.dead = true;
         a.dead = true;
         score += POINTS[a.size];
+        // Primer asteroide destruido de la partida: activa el disparo triple
+        if (!tripleShotUsed) {
+          tripleShotUsed = true;
+          tripleShotTimer = TRIPLE_SHOT_DURATION;
+        }
         explode(a.x, a.y, a.size * 5);
         newAsteroids.push(...a.split());
       }
@@ -414,6 +438,14 @@ function drawHUD() {
   ctx.fillText(`NIVEL ${level}`, W / 2, 26);
 
   for (let i = 0; i < lives; i++) drawLifeIcon(W - 16 - i * 22, 18);
+
+  if (tripleShotTimer > 0) {
+    ctx.textAlign = "center";
+    ctx.fillStyle = "#0ff";
+    ctx.font = "bold 22px monospace";
+    ctx.fillText(`TRIPLE  ${tripleShotTimer.toFixed(1)}s`, W / 2, 54);
+    ctx.fillStyle = "#fff";
+  }
 }
 
 function drawOverlay(title, sub) {

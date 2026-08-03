@@ -85,6 +85,7 @@ We can paste images inside the terminal and, we can combine it with text. (we ca
 ## Use of GIT
 
 Claude can use GIT from our terminal (It has full access to it as it can see .git directory inside the project). It may be better to use plan mode to explore git history changes.
+To work on new features it's recommended to work in a different branch.
 
 ### Important Notes
 
