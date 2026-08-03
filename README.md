@@ -64,7 +64,15 @@ Contrast subagent: skill = instructions injected into current thread. Subagent =
 
 ## Claude Code File
 
-Use the command `/init` to init a new `CLAUDE.md` file with codebase documentation. **This file is included in the context window**.
+Use the command `/init` to init a new `CLAUDE.md` file with codebase documentation. **This file is included in the context window**. Ideally, it should be small.
+
+With `#` we can save some memories in claude. Memory files live somewhere else, outside the project (`Usually /Users/username/.claude`). There we can find memories classified by project with a `MEMORY.md` file.
+
+Example:
+
+```bash
+# always answer in English
+```
 
 ### Important Notes
 
