@@ -74,6 +74,14 @@ Example:
 # always answer in English
 ```
 
+## Multi Modal Input
+
+We can paste images inside the terminal and, we can combine it with text. (we can also send entire files).
+
+```bash
+[Image #1] use this image as one of the asteroids variant
+```
+
 ### Important Notes
 
 - Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
