@@ -76,7 +76,7 @@ Example:
 
 ## Multi Modal Input
 
-We can paste images inside the terminal and, we can combine it with text. (we can also send entire files).
+We can paste images inside the terminal and, we can combine it with text. (we can also send entire files of different types to add more context for claude to work with).
 
 ```bash
 [Image #1] use this image as one of the asteroids variant

@@ -21,5 +21,5 @@ File created: [counter.html](/01-first-code/counter.html)
 After pasting the image we can send:
 
 ```bash
-[Image #1] use this image as one of the asteroids variant
+[Image #1] use this image as one of the big asteroids variant
 ```
