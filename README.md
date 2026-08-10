@@ -82,6 +82,11 @@ We can paste images inside the terminal and, we can combine it with text. (we ca
 [Image #1] use this image as one of the asteroids variant
 ```
 
+## Thinking Mode
+
+In `claude-code` we can use a thinking mode. To use it just mention it in the chat.
+We can also specify it using `/effort`
+
 ## Use of GIT
 
 Claude can use GIT from our terminal (It has full access to it as it can see .git directory inside the project). It may be better to use plan mode to explore git history changes.
