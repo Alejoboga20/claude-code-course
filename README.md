@@ -92,6 +92,10 @@ We can also specify it using `/effort`
 Claude can use GIT from our terminal (It has full access to it as it can see .git directory inside the project). It may be better to use plan mode to explore git history changes.
 To work on new features it's recommended to work in a different branch.
 
+# Batch - Worktress
+
+Utilizamos el comando `/batch` para orquestar cambios masivos en paralelo en todo el codebase con worktrees.
+
 ### Important Notes
 
 - Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
