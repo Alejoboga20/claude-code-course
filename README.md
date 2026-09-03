@@ -108,6 +108,12 @@ git worktree add .trees/<feature_name>
 3. We can init claude inside each of the trees previously created using the terminal. This way we can intereact with each instance if necessary.
 4. After each agent finishes, we can join the branches.
 
+```bash
+git worktree list # check existing trees
+```
+
+5. At this point we can use claude to merge the branches or we can do it ourselves. After that we should delete the trees.
+
 ### Important Notes
 
 - Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
