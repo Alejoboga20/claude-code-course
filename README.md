@@ -94,7 +94,19 @@ To work on new features it's recommended to work in a different branch.
 
 # Batch - Worktress
 
-Utilizamos el comando `/batch` para orquestar cambios masivos en paralelo en todo el codebase con worktrees.
+We can use `/batch` command to orchestrate massive changes in parallel with worktrees.
+
+We can also do it manually creating worktrees in git.
+
+1. At root folder, create `.trees` directory.
+2. Use the following command to create worktrees. We can create as many as we want.
+
+```bash
+git worktree add .trees/<feature_name>
+```
+
+3. We can init claude inside each of the trees previously created using the terminal. This way we can intereact with each instance if necessary.
+4. After each agent finishes, we can join the branches.
 
 ### Important Notes
 
