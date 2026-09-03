@@ -114,6 +114,10 @@ git worktree list # check existing trees
 
 5. At this point we can use claude to merge the branches or we can do it ourselves. After that we should delete the trees.
 
+# Personalized Command /worktree
+
+We can create custom commands to automate the process. We just ask claude to create it for us.
+
 ### Important Notes
 
 - Always clear the context when finishing a task. This is really important to avoid consuming more tokens than necessary. (Use `/clear` command).
