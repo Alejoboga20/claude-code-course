@@ -114,6 +114,10 @@ git worktree list # check existing trees
 
 5. At this point we can use claude to merge the branches or we can do it ourselves. After that we should delete the trees.
 
+# Skills
+
+A skill for an AI agent is a reusable package of instructions that teaches the agent how to do a specific kind of task well.
+
 # Personalized Command /worktree
 
 We can create custom commands to automate the process. We just ask claude to create it for us.
