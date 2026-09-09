@@ -118,6 +118,14 @@ git worktree list # check existing trees
 
 A skill for an AI agent is a reusable package of instructions that teaches the agent how to do a specific kind of task well.
 
+Skills For SDD: [Skills](https://github.com/Klerith/fernando-skills?tab=readme-ov-file)
+
+Install useful skills for Spec-Driven-Design with this:
+
+```bash
+npx skills@latest add Klerith/fernando-skills
+```
+
 # Personalized Command /worktree
 
 We can create custom commands to automate the process. We just ask claude to create it for us.
