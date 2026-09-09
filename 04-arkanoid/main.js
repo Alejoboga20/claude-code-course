@@ -11,6 +11,13 @@ const paddle = { x: canvas.width / 2 - 81, y: canvas.height - 30, width: 162, he
 
 const ball = { x: 0, y: 0, radius: 8, dx: 0, dy: 0, speed: 4 };
 
+const bounceSound = new Audio('assets/sounds/ball-bounce.mp3');
+
+function playBounceSound() {
+  bounceSound.currentTime = 0;
+  bounceSound.play();
+}
+
 function resetBallOnPaddle() {
   ball.x = paddle.x + paddle.width / 2;
   ball.y = paddle.y - ball.radius;
@@ -18,11 +25,19 @@ function resetBallOnPaddle() {
   ball.dy = 0;
 }
 
+function launch() {
+  if (state.phase !== 'waiting') return;
+  state.phase = 'playing';
+  ball.dx = ball.speed * 0.5;
+  ball.dy = -ball.speed;
+}
+
 const keys = { left: false, right: false };
 
 document.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') keys.left = true;
   if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') keys.right = true;
+  launch();
 });
 
 document.addEventListener('keyup', (e) => {
@@ -36,6 +51,8 @@ canvas.addEventListener('mousemove', (e) => {
   paddle.x = clamp(mouseX - paddle.width / 2, 0, canvas.width - paddle.width);
 });
 
+canvas.addEventListener('click', launch);
+
 function clamp(value, min, max) {
   return Math.max(min, Math.min(max, value));
 }
@@ -46,6 +63,44 @@ function updatePaddle() {
   paddle.x = clamp(paddle.x, 0, canvas.width - paddle.width);
 
   if (state.phase === 'waiting') resetBallOnPaddle();
+}
+
+function updateBall() {
+  if (state.phase !== 'playing') return;
+
+  ball.x += ball.dx;
+  ball.y += ball.dy;
+
+  if (ball.x - ball.radius <= 0) {
+    ball.x = ball.radius;
+    ball.dx = -ball.dx;
+    playBounceSound();
+  } else if (ball.x + ball.radius >= canvas.width) {
+    ball.x = canvas.width - ball.radius;
+    ball.dx = -ball.dx;
+    playBounceSound();
+  }
+
+  if (ball.y - ball.radius <= 0) {
+    ball.y = ball.radius;
+    ball.dy = -ball.dy;
+    playBounceSound();
+  }
+
+  const hitsPaddle =
+    ball.dy > 0 &&
+    ball.y + ball.radius >= paddle.y &&
+    ball.y + ball.radius <= paddle.y + paddle.height &&
+    ball.x >= paddle.x &&
+    ball.x <= paddle.x + paddle.width;
+
+  if (hitsPaddle) {
+    ball.y = paddle.y - ball.radius;
+    const offset = (ball.x - (paddle.x + paddle.width / 2)) / (paddle.width / 2);
+    ball.dx = offset * ball.speed;
+    ball.dy = -Math.sqrt(Math.max(0.1, ball.speed * ball.speed - ball.dx * ball.dx));
+    playBounceSound();
+  }
 }
 
 function drawStartMessage() {
@@ -65,6 +120,7 @@ function draw() {
 
 function loop() {
   updatePaddle();
+  updateBall();
   draw();
   requestAnimationFrame(loop);
 }
