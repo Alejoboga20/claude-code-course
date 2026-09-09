@@ -1,6 +1,6 @@
 # SPEC 01 — Arkanoid MVP
 
-> **Status:** Draft
+> **Status:** Approved
 > **Depends on:** none
 > **Date:** 2026-09-09
 > **Objective:** Build a playable single-level Arkanoid MVP where the player moves a paddle to bounce a ball, breaks blocks to score points, and either clears the level to win or loses all lives, with sound, a live HUD, and win/game-over overlays that let the player restart.
@@ -41,7 +41,7 @@
 ```js
 // Game state, held in main.js
 const state = {
-  phase: 'waiting', // 'waiting' | 'playing' | 'game-over' | 'win'
+  phase: "waiting", // 'waiting' | 'playing' | 'game-over' | 'win'
   score: 0,
   lives: 3,
 };
@@ -53,7 +53,7 @@ const ball = { x, y, radius, dx, dy, speed };
 // Block grid: fixed rows x cols matrix, one entry per cell.
 // null = already broken / no block. String = SPRITES.blocks color key.
 const blocks = [
-  ['red', 'red', 'yellow', 'yellow', 'cyan', 'cyan'],
+  ["red", "red", "yellow", "yellow", "cyan", "cyan"],
   // ...more rows, hardcoded
 ];
 ```
@@ -117,9 +117,9 @@ Conventions:
 
 ## Risks
 
-| Risk                                                                 | Mitigation                                                                                          |
-| --------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
-| Browser autoplay policies can block audio before any user gesture     | Sounds only ever trigger after the player's launch action or during active play, which already counts as user interaction. |
+| Risk                                                                          | Mitigation                                                                                                                                                |
+| ----------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Browser autoplay policies can block audio before any user gesture             | Sounds only ever trigger after the player's launch action or during active play, which already counts as user interaction.                                |
 | `loadSpritesheet` is asynchronous; drawing before it resolves no-ops silently | Game loop only starts real rendering/collision logic inside the `loadSpritesheet` callback, matching the pattern already used in `assets/spritesheet.js`. |
 
 ---
